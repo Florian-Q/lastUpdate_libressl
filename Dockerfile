@@ -21,11 +21,11 @@ RUN OFFICIAL_DEPO="https://ftp.openbsd.org/pub/OpenBSD/LibreSSL" \
 	&& echo "the last version of LibreSSL is : $LAST_VERSION" \
 	#
 	&& LIBRESSL_TARBALL="libressl-$LAST_VERSION.tar.gz" \
-	&& mkdir -p $PATH_LIBRESSL_EXTRACT \
 	&& curl -fSL $OFFICIAL_DEPO/$LIBRESSL_TARBALL -o $LIBRESSL_TARBALL \
 	&& curl -fSL $OFFICIAL_DEPO/$LIBRESSL_TARBALL.asc -o $LIBRESSL_TARBALL.asc \
 	&& curl -fSL $OFFICIAL_DEPO/libressl.asc -o libressl.asc \
 	&& gpg --import libressl.asc \
 	&& gpg --batch --verify $LIBRESSL_TARBALL.asc $LIBRESSL_TARBALL \
 	#
-	&& tar -zxC $PATH_LIBRESSL_EXTRACT -f $LIBRESSL_TARBALL
+	&& tar -zxf $LIBRESSL_TARBALL \
+	&& mv "libressl-$LAST_VERSION" $PATH_LIBRESSL_EXTRACT
