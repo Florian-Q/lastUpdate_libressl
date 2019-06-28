@@ -7,6 +7,12 @@ WORKDIR /tmp/libressl
 RUN OFFICIAL_DEPO="https://ftp.openbsd.org/pub/OpenBSD/LibreSSL" \
 	&& apt-get update && apt-get install -y --no-install-recommends --no-install-suggests \
 		ca-certificates \
+		build-essential \
+		automake \
+	    autoconf \
+	    libtool \
+	    perl \
+	    git \
 	    curl \
 	    wget \
 	    gnupg \
@@ -30,5 +36,5 @@ RUN OFFICIAL_DEPO="https://ftp.openbsd.org/pub/OpenBSD/LibreSSL" \
 	&& tar -zxf $LIBRESSL_TARBALL \
 	&& mv "libressl-$LAST_VERSION" $PATH_LIBRESSL_EXTRACT \
 	&& cd $PATH_LIBRESSL_EXTRACT \
-	&& ./configure LDFLAGS=-lrt --prefix=.openssl/ \
+	&& ./configure LDFLAGS=-lrt --prefix=$PATH_LIBRESSL_EXTRACT/.openssl/ \
 	&& make install-strip -j $(nproc)
