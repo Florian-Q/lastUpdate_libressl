@@ -28,4 +28,7 @@ RUN OFFICIAL_DEPO="https://ftp.openbsd.org/pub/OpenBSD/LibreSSL" \
 	&& gpg --batch --verify $LIBRESSL_TARBALL.asc $LIBRESSL_TARBALL \
 	#
 	&& tar -zxf $LIBRESSL_TARBALL \
-	&& mv "libressl-$LAST_VERSION" $PATH_LIBRESSL_EXTRACT
+	&& mv "libressl-$LAST_VERSION" $PATH_LIBRESSL_EXTRACT \
+	&& cd $PATH_LIBRESSL_EXTRACT \
+	&& ./configure LDFLAGS=-lrt --prefix=.openssl/ \
+	&& make install-strip -j $(nproc)
