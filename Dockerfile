@@ -36,5 +36,5 @@ RUN OFFICIAL_DEPO="https://ftp.openbsd.org/pub/OpenBSD/LibreSSL" \
 	&& tar -zxf $LIBRESSL_TARBALL \
 	&& mv "libressl-$LAST_VERSION" $PATH_LIBRESSL_EXTRACT \
 	&& cd $PATH_LIBRESSL_EXTRACT \
-	&& ./configure LDFLAGS=-lrt --prefix=$PATH_LIBRESSL_EXTRACT/.openssl/ \
+	&& ./configure --prefix=$PATH_LIBRESSL_EXTRACT/.openssl/ \
 	&& make install-strip -j $(nproc)
